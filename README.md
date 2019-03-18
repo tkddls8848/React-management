@@ -1,3 +1,6 @@
+##Management System
+본 프로젝트는 리엑트를 이용한 고객관리 시스템 구축목적입니다.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

@@ -6,7 +6,7 @@ class Customer extends Component{
     render(){
         return(
             <TableRow>
-                <TableCell>{this.props.id}</TableCell>
+                <TableCell component="th">{this.props.id}</TableCell>
                 <TableCell><img src={this.props.image} alt='profile'></img></TableCell>
                 <TableCell>{this.props.name}</TableCell>
                 <TableCell>{this.props.birthday}</TableCell>

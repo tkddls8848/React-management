@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use('/image', express.static('./upload'));
 
 app.post('/api/customers', upload.single('image'), (req,res) => {
-  let sql = 'INSERT INTO CUSTOMER VALUES (null, ?, ?, ?, ?, ?)';
+  let sql = 'INSERT INTO CUSTOMER VALUES (null, ?, ?, ?, ?, ?, NOW(), 0)';
   let image = './image/' + req.file.filename;
   let userName = req.body.userName;
   let birthday = req.body.birthday;
@@ -39,7 +39,17 @@ app.post('/api/customers', upload.single('image'), (req,res) => {
 
 app.get('/api/customers', (req, res)=>{
   db.query(
-    "SELECT * FROM CUSTOMER", (err, results, fields) => {
+    "SELECT * FROM CUSTOMER WHERE isDeleted = 0", (err, results, fields) => {
+      res.send(results);
+    }
+  );
+});
+
+app.delete('/api/customers/:id', (req, res)=>{
+  let SQL = "UPDATE CUSTOMER SET isDeleted = 1 WHERE id = ?";
+  let params = [req.params.id];
+  db.query(
+    SQL, params , (err, results, fields) => {
       res.send(results);
     }
   );
